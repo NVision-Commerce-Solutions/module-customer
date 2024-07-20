@@ -1,0 +1,23 @@
+{
+    "name": "commerce365/module-customer",
+    "version": "1.0.0",
+    "description": "Commerce 365 for Magento - B2B - Customer  module",
+    "homepage": "https://n.vision/products/commerce-365-for-magento-b2b/",
+    "type": "magento2-module",
+    "require": {
+        "magento/framework": "*",
+        "magento/module-catalog": "104.0.*",
+        "commerce365/module-core": "2.0.*"
+    },
+    "license": [
+        "OSL-3.0"
+    ],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Commerce365\\Customer\\": ""
+        }
+    }
+}
