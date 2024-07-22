@@ -35,8 +35,6 @@ class AfterAddressSaveUpdateUpdatedAt implements ObserverInterface
                 $customer->setUpdatedAt(null);
                 $this->updated = true;
 
-                // Using save because repo/resource model triggers this same event and thus infinite loop
-                // See how Magento does it here: vendor/magento/module-customer/Observer/AfterAddressSaveObserver.php
                 $this->customerRepository->save($customer->getDataModel());
             }
         } catch (\Exception $e) {
