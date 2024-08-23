@@ -1,0 +1,9 @@
+<body>
+       <referenceBlock name="customer_form">
+         <block class="Commerce365\Customer\Block\Adminhtml\Edit\Tab\CustomerAttributes" name="c365_customer_attributes" >
+          <!-- <action method="setTabLabel">
+              <argument name="label" xsi:type="string">Commerce 365 x</argument>
+          </action> -->
+        </block>
+      </referenceBlock>
+</body>
