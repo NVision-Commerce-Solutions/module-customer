@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="commerce365_customer_address" resource="default" engine="innodb" comment="Commerce365 OAuth Table">
+        <column xsi:type="int" name="entity_id" identity="true"  unsigned="true" nullable="false" comment="Entity Id"/>
+        <column xsi:type="int" name="address_id"  unsigned="true" nullable="false" comment="Address Id"/>
+        <column xsi:type="int" name="system_id"  unsigned="true" nullable="false" comment="System Id"/>
+        <column xsi:type="varchar" name="ship_to_code"  nullable="true" length="255" comment="Ship To Code"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="COMMERCE365_CUSTOMER_ADDRESS_ADDRESS_ID_CUSTOMER_ADDRESS_ENTITY_ENTITY_ID"
+                    table="commerce365_customer_address" column="address_id" referenceTable="customer_address_entity"
+                    referenceColumn="entity_id" onDelete="CASCADE"/>
+        <index referenceId="COMMERCE365_CUSTOMER_ADDRESS_ADDRESS_ID" indexType="btree">
+            <column name="address_id"/>
+        </index>
+    </table>
+</schema>

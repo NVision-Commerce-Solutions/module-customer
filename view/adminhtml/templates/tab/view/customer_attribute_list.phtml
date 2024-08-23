@@ -1,0 +1,92 @@
+<?php
+
+/** @var \Commerce365\Customer\Block\Adminhtml\CustomerAttributeList $block */
+
+$lastLoginDateAdmin = $block->getLastLoginDate();
+$lastLoginDateStore = $block->getStoreLastLoginDate();
+
+$createDateAdmin = $block->getCreateDate();
+$createDateStore = $block->getStoreCreateDate();
+$allowedAddressHtmlTags = ['b', 'br', 'em', 'i', 'li', 'ol', 'p', 'strong', 'sub', 'sup', 'ul'];
+?>
+<div class="fieldset-wrapper customer-information">
+    <div class="fieldset-wrapper-title">
+        <span class="title"><?= $block->escapeHtml(__('Business Central - Custom Properties')) ?></span>
+    </div>
+    <table class="admin__table-secondary">
+        <tbody>
+        <?= $block->getChildHtml() ?>
+        <tr>
+            <th><?= $block->escapeHtml(__('Customer No:')) ?></th>
+            <td><?= $block->escapeHtml($block->getBcCustomerNo()) ?></td>
+        </tr>
+        <tr>
+            <th><?= $block->escapeHtml(__('Contact No:')) ?></th>
+            <td><?= $block->escapeHtml($block->getBcContactNo()) ?></td>
+        </tr>
+        <tr>
+            <th><?= $block->escapeHtml(__('Customer Name:')) ?></th>
+            <td><?= $block->escapeHtml($block->getBcCustomerName()) ?></td>
+        </tr>
+        <tr>
+            <th><?= $block->escapeHtml(__('Customer Price Group:')) ?></th>
+            <td><?= $block->escapeHtml($block->getBcCustomerPriceGroup()) ?></td>
+        </tr>
+        <tr>
+            <th><?= $block->escapeHtml(__('Customer Discount Group:')) ?></th>
+            <td><?= $block->escapeHtml($block->getBcCustomerDiscountGroup()) ?></td>
+        </tr>
+        <tr>
+            <th><?= $block->escapeHtml(__('Payment Terms Code:')) ?></th>
+            <td><?= $block->escapeHtml($block->getBcPaymentTermsCode()) ?></td>
+        </tr>
+        <tr>
+            <th><?= $block->escapeHtml(__('Payment Method Code:')) ?></th>
+            <td><?= $block->escapeHtml($block->getBcPaymentMethodCode()) ?></td>
+        </tr>
+        <tr>
+            <th><?= $block->escapeHtml(__('Shipment Method Code:')) ?></th>
+            <td><?= $block->escapeHtml($block->getBcShipmentMethodCode()) ?></td>
+        </tr>
+        <tr>
+            <th><?= $block->escapeHtml(__('Shipment Agent Code:')) ?></th>
+            <td><?= $block->escapeHtml($block->getBcShipmentAgentCode()) ?></td>
+        </tr>
+        <tr>
+            <th><?= $block->escapeHtml(__('Shipment Agent Service Code:')) ?></th>
+            <td><?= $block->escapeHtml($block->getBcShipmentAgentServiceCode()) ?></td>
+        </tr>
+        <tr>
+            <th><?= $block->escapeHtml(__('Location Code:')) ?></th>
+            <td><?= $block->escapeHtml($block->getBcCustomerLocationCode()) ?></td>
+        </tr>
+        <tr>
+            <th><?= $block->escapeHtml(__('Blocked Status:')) ?></th>
+            <td><?= $block->escapeHtml($block->getBcCustomerBlocked()) ?></td>
+        </tr>
+        <?php $parentCustomerUrl = $this->getParentCustomerUrl(); ?>
+        <?php if($parentCustomerUrl): ?>
+            <tr>
+                <th><?= $block->escapeHtml(__('Parent Customer:')) ?></th>
+                <td>
+                    <a href="<?= $parentCustomerUrl ?>" target="_blank">
+                        <?= $block->escapeHtml($block->getParentCustomerEmail()) ?>
+                    </a>
+                </td>
+            </tr>
+        <?php endif; ?>
+        </tbody>
+    </table>
+    <address>
+        <p>
+            <b>Commerce 365 for Magento</b>
+        </p>
+        <p>This Magento installation is powered by Commerce 365 for Magento.
+        This means that almost all data you will find in this Magento back-end comes from Microsoft Dynamics 365 Business Central.
+        </p>
+        <p>
+        The properties shown in the left column are additional custom attributes which are also in-sync with Business Central. If you require more properties to be sent from BC to Magento, please see the online manual.
+        </p>
+    </address>
+
+</div>
