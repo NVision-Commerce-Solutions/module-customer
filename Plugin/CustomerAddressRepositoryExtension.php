@@ -53,5 +53,7 @@ class CustomerAddressRepositoryExtension
         $customerAddress->setSystemId($systemId);
         $customerAddress->setShipToCode($shipToCode);
         $this->customerAddressRepository->save($customerAddress);
+
+        return $result;
     }
 }
