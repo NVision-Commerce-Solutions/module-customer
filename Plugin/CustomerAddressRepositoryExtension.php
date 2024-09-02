@@ -43,6 +43,10 @@ class CustomerAddressRepositoryExtension
     {
         $systemId = $entity->getExtensionAttributes()->getSystemId();
         $shipToCode = $entity->getExtensionAttributes()->getShipToCode();
+        if (!$systemId && !$shipToCode) {
+            return $result;
+        }
+
         $customerAddress = $this->customerAddressRepository->getByAddressId($entity->getId());
 
         if (!$customerAddress->getId()) {
