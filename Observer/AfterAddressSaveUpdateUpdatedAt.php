@@ -15,7 +15,7 @@ use Psr\Log\LoggerInterface;
  */
 class AfterAddressSaveUpdateUpdatedAt implements ObserverInterface
 {
-    private bool $updated;
+    private bool $updated = false;
 
     public function __construct(
         private readonly CustomerRepositoryInterface $customerRepository,
