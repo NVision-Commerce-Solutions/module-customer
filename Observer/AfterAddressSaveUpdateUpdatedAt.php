@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Commerce365\Customer\Observer;
 
+use Commerce365\Customer\Model\Command\UpdateCustomerUpdatedAtField;
 use Magento\Customer\Api\CustomerRepositoryInterface;
 use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
@@ -18,7 +19,7 @@ class AfterAddressSaveUpdateUpdatedAt implements ObserverInterface
     private bool $updated = false;
 
     public function __construct(
-        private readonly CustomerRepositoryInterface $customerRepository,
+        private readonly UpdateCustomerUpdatedAtField $updateCustomerUpdatedAtField,
         private readonly LoggerInterface $logger
     ) {}
 
@@ -31,12 +32,8 @@ class AfterAddressSaveUpdateUpdatedAt implements ObserverInterface
         $customerAddress = $observer->getCustomerAddress();
         try {
             $customer = $customerAddress->getCustomer();
-            if ($customer && !$this->updated) {
-                $customer->setUpdatedAt(null);
-                $this->updated = true;
-
-                $this->customerRepository->save($customer->getDataModel());
-            }
+            $updatedAt = $customerAddress->getData('updated_at');
+            $this->updateCustomerUpdatedAtField->execute($customer->getId(), $updatedAt);
         } catch (\Exception $e) {
             $this->logger->error("Failed to update customer updated_at field: " . $e->getMessage());
         }
