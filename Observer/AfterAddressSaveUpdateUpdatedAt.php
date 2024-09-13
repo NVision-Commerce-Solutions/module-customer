@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Commerce365\Customer\Observer;
 
 use Commerce365\Customer\Model\Command\UpdateCustomerUpdatedAtField;
-use Magento\Customer\Api\CustomerRepositoryInterface;
 use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
 use Magento\Customer\Model\Address;
@@ -16,8 +15,6 @@ use Psr\Log\LoggerInterface;
  */
 class AfterAddressSaveUpdateUpdatedAt implements ObserverInterface
 {
-    private bool $updated = false;
-
     public function __construct(
         private readonly UpdateCustomerUpdatedAtField $updateCustomerUpdatedAtField,
         private readonly LoggerInterface $logger

@@ -48,7 +48,6 @@ class CustomerAddressRepositoryExtension
         }
 
         $customerAddress = $this->customerAddressRepository->getByAddressId($entity->getId());
-
         if (!$customerAddress->getId()) {
             $customerAddress = $this->customerAddressFactory->create();
             $customerAddress->setAddressId($entity->getId());
