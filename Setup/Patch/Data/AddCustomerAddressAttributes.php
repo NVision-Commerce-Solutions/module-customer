@@ -30,13 +30,16 @@ class AddCustomerAddressAttributes implements DataPatchInterface
 
     public function apply()
     {
-        $this->createAttribute( 'bc_shiptoaddress_code', 'BC Ship To Address Code', 'varchar', 'text', 300);
+        $this->createAttribute( 'bc_shiptoaddress_code', 'BC Ship To Address Code', 'varchar', 'text', 300, true);
         $this->createAttribute('bc_system_id', 'BC System Id', 'varchar', 'text', 305);
+
+        $attribute = $this->eavConfig->getAttribute(AddressMetadataInterface::ENTITY_TYPE_ADDRESS, 'bc_shiptoaddress_code');
+        $attribute?->setData('used_in_forms', ['adminhtml_customer_address', 'customer_address_edit'])->save();
 
         return $this;
     }
 
-    private function createAttribute($code, $label, $type, $input, $position)
+    private function createAttribute($code, $label, $type, $input, $position, $visible = false)
     {
         $eavSetup = $this->setupFactory->create(['setup' => $this->moduleDataSetup]);
         if ($eavSetup->getAttribute(AddressMetadataInterface::ENTITY_TYPE_ADDRESS, $code)) {
@@ -56,11 +59,8 @@ class AddCustomerAddressAttributes implements DataPatchInterface
                 'is_filterable_in_grid' => true,
                 'position' => $position,
                 'system' => false,
-                'visible' => false
+                'visible' => $visible
             ]
         );
-
-        $attribute = $this->eavConfig->getAttribute(AddressMetadataInterface::ENTITY_TYPE_ADDRESS, $code);
-        $attribute?->setData('used_in_forms', ['adminhtml_customer'])->save();
     }
 }
