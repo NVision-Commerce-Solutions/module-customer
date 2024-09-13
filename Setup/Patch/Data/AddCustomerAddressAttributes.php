@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Commerce365\Customer\Setup\Patch\Data;
 
 use Magento\Customer\Api\AddressMetadataInterface;
-use Magento\Customer\Model\Customer;
 use Magento\Eav\Model\Config;
 use Magento\Eav\Setup\EavSetupFactory;
 use Magento\Framework\Setup\ModuleDataSetupInterface;
@@ -61,7 +60,7 @@ class AddCustomerAddressAttributes implements DataPatchInterface
             ]
         );
 
-        $attribute = $this->eavConfig->getAttribute(Customer::ENTITY, $code);
+        $attribute = $this->eavConfig->getAttribute(AddressMetadataInterface::ENTITY_TYPE_ADDRESS, $code);
         $attribute?->setData('used_in_forms', ['adminhtml_customer'])->save();
     }
 }
