@@ -21,6 +21,8 @@ class GetCustomerEmailById
         $select = $connection->select()->from($tableName, ['email'])
             ->where('entity_id = ?', $customerId);
 
-        return $connection->fetchOne($select);
+        $email = $connection->fetchOne($select);
+
+        return $email ?: '';
     }
 }
